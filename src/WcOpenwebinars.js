@@ -27,7 +27,16 @@ export class WcOpenwebinars extends LitElement {
 
   static get properties() {
     return {
-
+      title: {type : String, reflect:true, attribute:false},
+      age: {type : Number},
+      pagination: {reflect:true, converter:{
+        toAttribute(value){
+          return value ? 'yes': 'no';
+        },
+        fromAttribute(value){
+          return value === 'yes';
+        }
+      }}
     };
   }
 
@@ -38,6 +47,7 @@ export class WcOpenwebinars extends LitElement {
     this.list = ['Lit', 'OpenWC', 'LitHtml'];
     this.isTrue = true;
     this.age = 18;
+    this.pagination = true;
 
   }
 
@@ -45,6 +55,8 @@ export class WcOpenwebinars extends LitElement {
   render() {
     return html`
       <h1>${this.title}</h1>
+      <p> Edad: ${this.age}</p>
+      <p> Pagination: ${this.pagination}</p>
       <p>Esto es un ${this.other}</p>
       <slot name='myslot-one'></slot>
       <ul>
