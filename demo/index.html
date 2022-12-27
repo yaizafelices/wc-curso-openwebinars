@@ -2,7 +2,17 @@
 <html lang="en-GB">
 <head>
   <meta charset="utf-8">
-  <style></style>
+  <style>
+    :root{
+      --p-color: green;
+    }
+    body{
+      background: #fafafa;
+    }
+    wc-openwebinars{
+      display: block;
+    }
+  </style>
 </head>
 <body>
   <div id="demo"></div>
@@ -14,7 +24,9 @@
     render(
       html`
         <wc-openwebinars .title=${"Esto es un bindeo"}>
-          some light-dom
+          <p slot="myslot-one">Elemento 1</p>
+          <p slot="myslot-two">Elemento 2</p>
+          <a slot="myslot-two" href="#">Enlace</a>
         </wc-openwebinars>
       `,
       document.querySelector('#demo')
