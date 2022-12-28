@@ -48,14 +48,31 @@ export class WcOpenwebinars extends LitElement {
     this.isTrue = true;
     this.age = 18;
     this.pagination = true;
+  }
 
+  connectedCallback(){
+    super.connectedCallback();
+    this.addEventListener('another-event', () => console.log('evento lanzado!!'))
+  }
+
+  disconnectedCallback(){
+    super.disconnectedCallback();
+    this.removeEventListener('another-event');
+  }
+
+  firstUpdated () {
+    console.log('firstUpdated!!');
+  }
+
+  updated(){
+    console.log('updated!!');
   }
 
 
   render() {
     return html`
       <h1 @click=${this.handleClick}>${this.title}</h1>
-      <p> Edad: ${this.age}</p>
+      <p @click=${this.handleEvent}> Edad: ${this.age}</p>
       <p> Pagination: ${this.pagination}</p>
       <p>Esto es un ${this.other}</p>
       <slot name='myslot-one'></slot>
@@ -84,6 +101,12 @@ export class WcOpenwebinars extends LitElement {
       bubble: true,
       composed:true,
     });
+
+    this.dispatchEvent(event);
+  }
+
+  handleEvent() {
+    const event = new CustomEvent('another-event');
 
     this.dispatchEvent(event);
   }
