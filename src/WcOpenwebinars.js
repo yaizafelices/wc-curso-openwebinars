@@ -1,5 +1,6 @@
 import { html, css, LitElement } from 'lit';
-import {styles} from './styles.js'
+import {styles} from './styles.js';
+import './MyMessage.js'
 
 function renderMessage(message = 'Valor default'){
   return html `<p>${message}</p>`
@@ -90,6 +91,7 @@ export class WcOpenwebinars extends LitElement {
       <slot name='myslot-two'></slot>
       ${renderMessage('Composición de templates')}
       <input type='text' @input=${(value)=> console.log(value)}>
+      <my-message></my-message>
     `;
   }
 
