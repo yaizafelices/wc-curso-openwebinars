@@ -54,7 +54,7 @@ export class WcOpenwebinars extends LitElement {
 
   render() {
     return html`
-      <h1>${this.title}</h1>
+      <h1 @click=${this.handleClick}>${this.title}</h1>
       <p> Edad: ${this.age}</p>
       <p> Pagination: ${this.pagination}</p>
       <p>Esto es un ${this.other}</p>
@@ -72,7 +72,19 @@ export class WcOpenwebinars extends LitElement {
       }
       <slot name='myslot-two'></slot>
       ${renderMessage('Composición de templates')}
-
+      <input type='text' @input=${(value)=> console.log(value)}>
     `;
+  }
+
+  handleClick() {
+    const event = new CustomEvent('my-event', {
+      detail:{
+        message:'Esto es el mensaje de un CustomEvent'
+      },
+      bubble: true,
+      composed:true,
+    });
+
+    this.dispatchEvent(event);
   }
 }
